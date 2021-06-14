@@ -16,6 +16,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user){
+        userService.register(user);
+        return user;
+    }
+
     @PostMapping(path = "/login")
     public User login(@RequestBody User user){
         System.out.println(user);

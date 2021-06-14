@@ -10,4 +10,8 @@ public class UserService {
     public void login(User user){
 
     }
+
+    public void register(User user){
+
+    }
 }
