@@ -10,4 +10,26 @@
 
     <context:component-scan base-package="com.banyuan"/>
     <mvc:annotation-driven/>
+
+    <!--  登录验证拦截器  -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/book/**"/>
+            <mvc:mapping path="/type/**"/>
+            <mvc:exclude-mapping path="/type/"/>
+            <bean name="interceptor" class="com.banyuan.interceptor.UserInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--  视图解析器  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    </bean>
+
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 最大可上传的文件大小  单位：byte  超出后会抛出MaxUploadSizeExceededException异常，可以异常解析器捕获 -->
+        <property name="maxUploadSize" value="1048576"/>
+    </bean>
+
 </beans>
