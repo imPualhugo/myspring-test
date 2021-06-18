@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Repository
+@Deprecated
 public class AuthorDao {
 
     public AuthorBean getUserByName(AuthorBean bean) {

@@ -6,6 +6,7 @@ import com.banyuan.bean.user.AuthorBean;
 import com.banyuan.exception.BookException;
 import com.banyuan.message.ResponseData;
 import com.banyuan.service.book.BookService;
+import com.banyuan.service.book.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import static com.banyuan.message.MessageData.success;
 
 @RestController
-@RequestMapping("book")
+@RequestMapping("/book")
 public class BookController {
 
     @Autowired

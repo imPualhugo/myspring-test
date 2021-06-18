@@ -1,35 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  ">
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+          xmlns:context="http://www.springframework.org/schema/context"
+          xmlns:mvc="http://www.springframework.org/schema/mvc"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context.xsd
+							http://www.springframework.org/schema/mvc
+							http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--第一步 扫描类-->
+    <!-- 告知springmvc  哪些包中 存在 被注解的类 -->
+    <context:component-scan base-package="com.banyuan.controller"/>
 
-    <context:component-scan base-package="com.banyuan"/>
-    <mvc:annotation-driven/>
+    <!--第二步 注册注解开发驱动 -->
+    <!-- 使用fastJSON-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-    <!--  登录验证拦截器  -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/book/**"/>
-            <mvc:mapping path="/type/**"/>
-            <mvc:exclude-mapping path="/type/"/>
-            <bean name="interceptor" class="com.banyuan.interceptor.UserInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <bean id="fastJsonpResponseBodyAdvice" class="com.alibaba.fastjson.support.spring.FastJsonpResponseBodyAdvice">
+        <constructor-arg>
+            <list>
+                <value>callback</value>
+                <value>jsonp</value>
+            </list>
+        </constructor-arg>
+    </bean>
 
-    <!--  视图解析器  -->
+    <!--第三步 配置视图解析器 : 解析方法运行完之后的返回值-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置返回页面的路径前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 配置返回页面的路径后缀 -->
+        <property name="suffix" value=".jsp"/>
     </bean>
 
 
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 最大可上传的文件大小  单位：byte  超出后会抛出MaxUploadSizeExceededException异常，可以异常解析器捕获 -->
-        <property name="maxUploadSize" value="1048576"/>
+    <!-- 第五步 配置文件上传解析器 -->
+    <!-- id和class是必须的，而且id不能修改 -->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
     </bean>
 
 </beans>

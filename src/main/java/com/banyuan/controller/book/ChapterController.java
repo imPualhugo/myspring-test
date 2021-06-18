@@ -6,6 +6,7 @@ import com.banyuan.bean.user.AuthorBean;
 import com.banyuan.exception.ChapterException;
 import com.banyuan.message.ResponseData;
 import com.banyuan.service.book.ChapterService;
+import com.banyuan.service.book.impl.ChapterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,9 @@ import static com.banyuan.message.MessageData.success;
 @RestController
 @RequestMapping("/chapter")
 public class ChapterController {
+
     @Autowired
     private ChapterService chapterService;
-
 
     @DeleteMapping("/{id}")
     public ResponseData delete(HttpSession session, @PathVariable Integer id) throws ChapterException {

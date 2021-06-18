@@ -4,6 +4,7 @@ package com.banyuan.controller.book;
 import com.banyuan.bean.book.TypeBean;
 import com.banyuan.message.ResponseData;
 import com.banyuan.service.book.TypeService;
+import com.banyuan.service.book.impl.TypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import static com.banyuan.message.MessageData.success;
 @RestController
 @RequestMapping("/type")
 public class TypeController {
+
     @Autowired
     private TypeService typeService;
 

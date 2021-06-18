@@ -4,6 +4,7 @@ import com.banyuan.bean.user.AuthorBean;
 import com.banyuan.message.MessageData;
 import com.banyuan.message.ResponseData;
 import com.banyuan.service.user.UserService;
+import com.banyuan.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseData login(AuthorBean bean,HttpServletRequest req) throws Exception {
+    public ResponseData login(AuthorBean bean, HttpServletRequest req) throws Exception {
         System.out.println(bean);
         userService.login(req, bean);
         ResponseData rd = new ResponseData();

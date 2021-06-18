@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.banyuan.mapper.book.ChapterMapper">
+
+    <select id="getList" resultType="com.banyuan.bean.book.ChapterBean">
+        select id, name, bookId
+        from chapter
+        where bookId = #{bookId}
+          and authorId = #{authorId}
+    </select>
+
+
+    <select id="getChapterById" resultType="com.banyuan.bean.book.ChapterBean">
+        select *
+        from chapter
+        where id = #{id}
+          and authorId = #{authorId}
+    </select>
+
+
+    <insert id="insertChapter">
+        insert into chapter
+        values (default, #{name}, #{authorId}, #{bookId}, #{content}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="updateChapter">
+        update chapter
+        set name=#{name},
+            content=#{content},
+            updateTime=#{updateTime}
+        where id = #{id}
+          and authorId = #{authorId}
+    </update>
+
+    <delete id="deleteChapter">
+        delete from chapter where id=#{id}
+    </delete>
+</mapper>

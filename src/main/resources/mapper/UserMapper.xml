@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.banyuan.mapper.user.AuthorMapper">
+
+
+    <select id="getUserByName" resultType="com.banyuan.bean.user.AuthorBean">
+        select *
+        from author
+        where userName = #{userName}
+    </select>
+
+
+    <insert id="insertAuthor">
+        insert into author
+        values (default,
+                #{userName},
+                #{password}, #{nickName}, #{createTime}, #{updateTime})
+    </insert>
+
+
+</mapper>

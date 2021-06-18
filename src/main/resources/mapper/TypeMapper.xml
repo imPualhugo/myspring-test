@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.banyuan.mapper.book.TypeMapper">
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1) from type
+        <where>
+            <if test="name!=''">
+                name like '%${name}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="getList" resultType="com.banyuan.bean.book.TypeBean">
+        select * from type
+        <where>
+            <if test="name!=''">
+                name like '%${name}%'
+            </if>
+        </where>
+        limit #{start},#{pageSize}
+    </select>
+
+
+    <select id="getListAll" resultType="com.banyuan.bean.book.TypeBean">
+        select id, name
+        from type
+    </select>
+
+
+    <insert id="insertType">
+        insert into type
+        values (default, #{name}, #{createTimeTime}, #{updateTime})
+    </insert>
+
+
+    <update id="updateType">
+        update type
+        set name=#{name},
+            updateTime=#{updateTime}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteType">
+        delete
+        from type
+        where id = #{id}
+    </delete>
+
+</mapper>
