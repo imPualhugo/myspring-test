@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/bqg
+      username: root
+      password: 123456
+
+
+mybatis:
+  type-aliases-package: com.banyuan.bean
+  mapper-locations: mapper/*.xml
+
+logging:
+  level:
+    org.springframework: debug
+    com.banyuan.mapper: debug
