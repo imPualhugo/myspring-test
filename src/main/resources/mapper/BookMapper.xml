@@ -17,12 +17,11 @@
         select *, t.name as typeName
         from book b
         left join type t on b.typeId = t.id
-        <where>
-            authorId = ?
-            <if test="b.name!=''">
-                and b.name like '%${name}%'
-            </if>
-        </where>
+        where
+        authorId = ?
+        <if test="b.name!=''">
+            and b.name like '%${name}%'
+        </if>
         limit ?,?
     </select>
 
@@ -50,7 +49,9 @@
     </update>
 
     <delete id="deleteBook">
-        delete from book where id=#{id}
+        delete
+        from book
+        where id = #{id}
     </delete>
 
 </mapper>
