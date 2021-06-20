@@ -3,9 +3,11 @@ package com.banyuan.bean.book;
 import com.banyuan.bean.BaseBean;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.text.SimpleDateFormat;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class TypeBean extends BaseBean {
     private int id;
@@ -22,7 +24,6 @@ public class TypeBean extends BaseBean {
         stringCreateTime = sdf.format(createTime);
         stringUpdateTime = sdf.format(updateTime);
     }
-
 
 
     public TypeBean() {

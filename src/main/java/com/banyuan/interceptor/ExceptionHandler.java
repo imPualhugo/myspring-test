@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 
 @Component
@@ -27,13 +28,9 @@ public class ExceptionHandler implements HandlerExceptionResolver {
         MappingJackson2JsonView view = new MappingJackson2JsonView();
         mv.setView(view);
         mv.addObject("state", rd.getState());
-        if (e.getMessage() != null) {
-            mv.addObject("message", e.getMessage());
-        }else{
-            mv.addObject("message", "服务器未知内部错误");
-        }
+        mv.addObject("message", "服务器内部错误");
 
-        mv.addObject("data", null);
+        mv.addObject("data", Arrays.toString(e.getStackTrace()));
         return mv;
     }
 }

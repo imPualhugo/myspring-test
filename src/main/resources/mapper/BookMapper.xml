@@ -7,7 +7,7 @@
     <select id="getCount" resultType="java.lang.Integer">
         select count(1) from book
         <where>
-            <if test="name!=''">
+            <if test="name!=null and name!=''">
                 name like '%${name}%'
             </if>
         </where>
@@ -19,7 +19,7 @@
         left join type t on b.typeId = t.id
         where
         authorId = ?
-        <if test="b.name!=''">
+        <if test="b.name!=null and b.name!=''">
             and b.name like '%${name}%'
         </if>
         limit ?,?

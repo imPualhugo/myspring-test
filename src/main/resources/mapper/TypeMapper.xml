@@ -7,7 +7,7 @@
     <select id="getCount" resultType="java.lang.Integer">
         select count(1) from type
         <where>
-            <if test="name!=''">
+            <if test="name!=null and name!=''">
                 name like '%${name}%'
             </if>
         </where>
@@ -16,7 +16,7 @@
     <select id="getList" resultType="com.banyuan.bean.book.TypeBean">
         select * from type
         <where>
-            <if test="name!=''">
+            <if test="name!=null and name!=''">
                 name like '%${name}%'
             </if>
         </where>

@@ -33,6 +33,8 @@
     </update>
 
     <delete id="deleteChapter">
-        delete from chapter where id=#{id}
+        delete
+        from chapter
+        where id = #{id}
     </delete>
 </mapper>

@@ -45,7 +45,17 @@ public enum MessageData {
         return rd;
     }
 
+
     public static ResponseData failed() {
         return failed(null);
     }
+
+
+    public static ResponseData notLoggedIn() {
+        ResponseData rd = new ResponseData();
+        rd.setState(MessageData.NOT_LOGIN.getCode());
+        rd.setMessage(MessageData.NOT_LOGIN.getMessage());
+        return rd;
+    }
+
 }
