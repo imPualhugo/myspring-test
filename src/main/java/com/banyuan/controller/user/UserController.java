@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.banyuan.message.MessageData.success;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -18,22 +20,18 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseData register(AuthorBean bean) throws Exception {
+    public ResponseData register(@RequestBody AuthorBean bean) throws Exception {
         userService.register(bean);
-        ResponseData rd = new ResponseData();
-        rd.setState(MessageData.REQUEST_SUCCESS.getCode());
-        rd.setMessage(MessageData.REQUEST_SUCCESS.getMessage());
-        return rd;
+        return success();
     }
 
     @PostMapping("/login")
-    public ResponseData login(AuthorBean bean, HttpServletRequest req) throws Exception {
+    public ResponseData login(@RequestBody AuthorBean bean, HttpServletRequest req) throws Exception {
         System.out.println(bean);
+
         userService.login(req, bean);
-        ResponseData rd = new ResponseData();
-        rd.setState(MessageData.REQUEST_SUCCESS.getCode());
-        rd.setMessage(MessageData.REQUEST_SUCCESS.getMessage());
-        return rd;
+
+        return success();
     }
 
 }

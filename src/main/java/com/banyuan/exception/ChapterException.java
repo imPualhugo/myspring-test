@@ -1,6 +1,6 @@
 package com.banyuan.exception;
 
-public class ChapterException extends Exception{
+public class ChapterException extends RuntimeException implements MyException {
     public ChapterException() {
     }
 

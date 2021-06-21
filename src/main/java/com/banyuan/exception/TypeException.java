@@ -1,6 +1,6 @@
 package com.banyuan.exception;
 
-public class TypeException extends Exception{
+public class TypeException extends RuntimeException implements MyException {
     public TypeException() {
     }
 
