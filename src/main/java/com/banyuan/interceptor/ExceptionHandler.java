@@ -1,5 +1,6 @@
 package com.banyuan.interceptor;
 
+import com.banyuan.exception.MyException;
 import com.banyuan.message.MessageData;
 import com.banyuan.message.ResponseData;
 import org.springframework.stereotype.Component;
@@ -24,13 +25,20 @@ public class ExceptionHandler implements HandlerExceptionResolver {
         ResponseData rd = new ResponseData();
         rd.setState(MessageData.REQUEST_FAILED.getCode());
         rd.setMessage(MessageData.REQUEST_FAILED.getMessage());
-        ModelAndView mv= new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         MappingJackson2JsonView view = new MappingJackson2JsonView();
         mv.setView(view);
         mv.addObject("state", rd.getState());
-        mv.addObject("message", "服务器内部错误");
 
-        mv.addObject("data", Arrays.toString(e.getStackTrace()));
+        if (e instanceof MyException) {
+            mv.addObject("message", e.getMessage());
+            mv.addObject("data", e.toString());
+        } else {
+            mv.addObject("message", "服务器内部错误");
+            mv.addObject("data", Arrays.toString(e.getStackTrace()));
+        }
+
+
         return mv;
     }
 }

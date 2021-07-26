@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AuthorMapper authorDao;
 
-    public void register(AuthorBean bean) throws Exception {
+    public void register(AuthorBean bean) {
         if (null == bean
                 || null == bean.getUserName()
                 || "".equals(bean.getUserName())
@@ -63,6 +63,10 @@ public class UserServiceImpl implements UserService {
 //        if (!real.equalsIgnoreCase(checkCode)){
 //            throw new UserException("验证码错误");
 //        }
+        AuthorBean loginBean = (AuthorBean) req.getSession().getAttribute("login");
+        if (null != loginBean) {
+            return;
+        }
 
         if (null == bean
                 || null == bean.getUserName()
@@ -77,6 +81,8 @@ public class UserServiceImpl implements UserService {
         System.out.println(authorDao);
 
         String encryptPassword = EncryptUtils.encrypt(bean.getPassword());
+
+
         if (queryBean == null || !queryBean.getPassword().equals(encryptPassword)) {
             throw new UserException("账号密码错误");
         }

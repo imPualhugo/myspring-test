@@ -1,6 +1,6 @@
 package com.banyuan.exception;
 
-public class BookException extends Exception{
+public class BookException extends RuntimeException implements MyException{
     public BookException() {
     }
 

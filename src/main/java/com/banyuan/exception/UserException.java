@@ -1,6 +1,6 @@
 package com.banyuan.exception;
 
-public class UserException extends Exception{
+public class UserException extends RuntimeException implements MyException {
     public UserException() {
     }
 
