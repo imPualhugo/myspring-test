@@ -9,7 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+/*
+  已弃用,请使用mapper中的映射类
+  This class is deprecated, use package 'mapper' classes please.
+ */
 @Repository
 @Deprecated
 public class AuthorDao {
